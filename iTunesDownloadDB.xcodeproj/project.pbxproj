@@ -8,17 +8,51 @@
 
 /* Begin PBXBuildFile section */
 		0A70DB972BFBA537007C8AAB /* iTunesDownloadDBApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A70DB962BFBA537007C8AAB /* iTunesDownloadDBApp.swift */; };
-		0A70DB992BFBA537007C8AAB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A70DB982BFBA537007C8AAB /* ContentView.swift */; };
 		0A70DB9B2BFBA538007C8AAB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A70DB9A2BFBA538007C8AAB /* Assets.xcassets */; };
 		0A70DB9E2BFBA538007C8AAB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A70DB9D2BFBA538007C8AAB /* Preview Assets.xcassets */; };
+		0AF1A3AC2BFC29A5002433E5 /* JSONParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A3972BFC29A5002433E5 /* JSONParameterEncoder.swift */; };
+		0AF1A3AD2BFC29A5002433E5 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A3982BFC29A5002433E5 /* NetworkError.swift */; };
+		0AF1A3AE2BFC29A5002433E5 /* ParameterEncoderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A3992BFC29A5002433E5 /* ParameterEncoderType.swift */; };
+		0AF1A3AF2BFC29A5002433E5 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A39A2BFC29A5002433E5 /* ParameterEncoding.swift */; };
+		0AF1A3B02BFC29A5002433E5 /* URLParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A39B2BFC29A5002433E5 /* URLParameterEncoder.swift */; };
+		0AF1A3B12BFC29A5002433E5 /* PodcastEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A39D2BFC29A5002433E5 /* PodcastEndPoint.swift */; };
+		0AF1A3B22BFC29A5002433E5 /* ThumbnailEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A39E2BFC29A5002433E5 /* ThumbnailEndPoint.swift */; };
+		0AF1A3B32BFC29A5002433E5 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A3A02BFC29A5002433E5 /* NetworkManager.swift */; };
+		0AF1A3B42BFC29A5002433E5 /* Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A3A22BFC29A5002433E5 /* Download.swift */; };
+		0AF1A3B52BFC29A5002433E5 /* EndPointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A3A32BFC29A5002433E5 /* EndPointType.swift */; };
+		0AF1A3B62BFC29A5002433E5 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A3A42BFC29A5002433E5 /* HTTPMethod.swift */; };
+		0AF1A3B72BFC29A5002433E5 /* HTTPTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A3A52BFC29A5002433E5 /* HTTPTask.swift */; };
+		0AF1A3B82BFC29A5002433E5 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A3A62BFC29A5002433E5 /* Router.swift */; };
+		0AF1A3B92BFC29A5002433E5 /* RouterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A3A72BFC29A5002433E5 /* RouterType.swift */; };
+		0AF1A3BA2BFC29A5002433E5 /* PodcastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A3AA2BFC29A5002433E5 /* PodcastModel.swift */; };
+		0AF1A3BF2BFC29B5002433E5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A3BB2BFC29B5002433E5 /* ContentView.swift */; };
+		0AF1A3C02BFC29B5002433E5 /* EpisodeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A3BC2BFC29B5002433E5 /* EpisodeRow.swift */; };
+		0AF1A3C12BFC29B5002433E5 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A3BD2BFC29B5002433E5 /* HomeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0A70DB932BFBA537007C8AAB /* iTunesDownloadDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTunesDownloadDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A70DB962BFBA537007C8AAB /* iTunesDownloadDBApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTunesDownloadDBApp.swift; sourceTree = "<group>"; };
-		0A70DB982BFBA537007C8AAB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0A70DB9A2BFBA538007C8AAB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A70DB9D2BFBA538007C8AAB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		0AF1A3972BFC29A5002433E5 /* JSONParameterEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParameterEncoder.swift; sourceTree = "<group>"; };
+		0AF1A3982BFC29A5002433E5 /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		0AF1A3992BFC29A5002433E5 /* ParameterEncoderType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterEncoderType.swift; sourceTree = "<group>"; };
+		0AF1A39A2BFC29A5002433E5 /* ParameterEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterEncoding.swift; sourceTree = "<group>"; };
+		0AF1A39B2BFC29A5002433E5 /* URLParameterEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLParameterEncoder.swift; sourceTree = "<group>"; };
+		0AF1A39D2BFC29A5002433E5 /* PodcastEndPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PodcastEndPoint.swift; sourceTree = "<group>"; };
+		0AF1A39E2BFC29A5002433E5 /* ThumbnailEndPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailEndPoint.swift; sourceTree = "<group>"; };
+		0AF1A3A02BFC29A5002433E5 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		0AF1A3A22BFC29A5002433E5 /* Download.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Download.swift; sourceTree = "<group>"; };
+		0AF1A3A32BFC29A5002433E5 /* EndPointType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndPointType.swift; sourceTree = "<group>"; };
+		0AF1A3A42BFC29A5002433E5 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		0AF1A3A52BFC29A5002433E5 /* HTTPTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPTask.swift; sourceTree = "<group>"; };
+		0AF1A3A62BFC29A5002433E5 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		0AF1A3A72BFC29A5002433E5 /* RouterType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterType.swift; sourceTree = "<group>"; };
+		0AF1A3AA2BFC29A5002433E5 /* PodcastModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PodcastModel.swift; sourceTree = "<group>"; };
+		0AF1A3BB2BFC29B5002433E5 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		0AF1A3BC2BFC29B5002433E5 /* EpisodeRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EpisodeRow.swift; sourceTree = "<group>"; };
+		0AF1A3BD2BFC29B5002433E5 /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +86,9 @@
 			isa = PBXGroup;
 			children = (
 				0A70DB962BFBA537007C8AAB /* iTunesDownloadDBApp.swift */,
-				0A70DB982BFBA537007C8AAB /* ContentView.swift */,
+				0AF1A3BE2BFC29B5002433E5 /* View */,
+				0AF1A3AB2BFC29A5002433E5 /* Model */,
+				0AF1A3A92BFC29A5002433E5 /* Networking */,
 				0A70DB9A2BFBA538007C8AAB /* Assets.xcassets */,
 				0A70DB9C2BFBA538007C8AAB /* Preview Content */,
 			);
@@ -65,6 +101,77 @@
 				0A70DB9D2BFBA538007C8AAB /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		0AF1A39C2BFC29A5002433E5 /* Encoding */ = {
+			isa = PBXGroup;
+			children = (
+				0AF1A3972BFC29A5002433E5 /* JSONParameterEncoder.swift */,
+				0AF1A3982BFC29A5002433E5 /* NetworkError.swift */,
+				0AF1A3992BFC29A5002433E5 /* ParameterEncoderType.swift */,
+				0AF1A39A2BFC29A5002433E5 /* ParameterEncoding.swift */,
+				0AF1A39B2BFC29A5002433E5 /* URLParameterEncoder.swift */,
+			);
+			path = Encoding;
+			sourceTree = "<group>";
+		};
+		0AF1A39F2BFC29A5002433E5 /* End Point */ = {
+			isa = PBXGroup;
+			children = (
+				0AF1A39D2BFC29A5002433E5 /* PodcastEndPoint.swift */,
+				0AF1A39E2BFC29A5002433E5 /* ThumbnailEndPoint.swift */,
+			);
+			path = "End Point";
+			sourceTree = "<group>";
+		};
+		0AF1A3A12BFC29A5002433E5 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				0AF1A3A02BFC29A5002433E5 /* NetworkManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		0AF1A3A82BFC29A5002433E5 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				0AF1A3A22BFC29A5002433E5 /* Download.swift */,
+				0AF1A3A32BFC29A5002433E5 /* EndPointType.swift */,
+				0AF1A3A42BFC29A5002433E5 /* HTTPMethod.swift */,
+				0AF1A3A52BFC29A5002433E5 /* HTTPTask.swift */,
+				0AF1A3A62BFC29A5002433E5 /* Router.swift */,
+				0AF1A3A72BFC29A5002433E5 /* RouterType.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		0AF1A3A92BFC29A5002433E5 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				0AF1A39C2BFC29A5002433E5 /* Encoding */,
+				0AF1A39F2BFC29A5002433E5 /* End Point */,
+				0AF1A3A12BFC29A5002433E5 /* Manager */,
+				0AF1A3A82BFC29A5002433E5 /* Service */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		0AF1A3AB2BFC29A5002433E5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0AF1A3AA2BFC29A5002433E5 /* PodcastModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0AF1A3BE2BFC29B5002433E5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0AF1A3BB2BFC29B5002433E5 /* ContentView.swift */,
+				0AF1A3BC2BFC29B5002433E5 /* EpisodeRow.swift */,
+				0AF1A3BD2BFC29B5002433E5 /* HomeViewModel.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +244,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A70DB992BFBA537007C8AAB /* ContentView.swift in Sources */,
+				0AF1A3B72BFC29A5002433E5 /* HTTPTask.swift in Sources */,
+				0AF1A3AF2BFC29A5002433E5 /* ParameterEncoding.swift in Sources */,
+				0AF1A3B22BFC29A5002433E5 /* ThumbnailEndPoint.swift in Sources */,
+				0AF1A3C12BFC29B5002433E5 /* HomeViewModel.swift in Sources */,
+				0AF1A3B42BFC29A5002433E5 /* Download.swift in Sources */,
+				0AF1A3B32BFC29A5002433E5 /* NetworkManager.swift in Sources */,
+				0AF1A3AD2BFC29A5002433E5 /* NetworkError.swift in Sources */,
+				0AF1A3B82BFC29A5002433E5 /* Router.swift in Sources */,
+				0AF1A3BA2BFC29A5002433E5 /* PodcastModel.swift in Sources */,
 				0A70DB972BFBA537007C8AAB /* iTunesDownloadDBApp.swift in Sources */,
+				0AF1A3B02BFC29A5002433E5 /* URLParameterEncoder.swift in Sources */,
+				0AF1A3B52BFC29A5002433E5 /* EndPointType.swift in Sources */,
+				0AF1A3AE2BFC29A5002433E5 /* ParameterEncoderType.swift in Sources */,
+				0AF1A3B62BFC29A5002433E5 /* HTTPMethod.swift in Sources */,
+				0AF1A3BF2BFC29B5002433E5 /* ContentView.swift in Sources */,
+				0AF1A3C02BFC29B5002433E5 /* EpisodeRow.swift in Sources */,
+				0AF1A3AC2BFC29A5002433E5 /* JSONParameterEncoder.swift in Sources */,
+				0AF1A3B92BFC29A5002433E5 /* RouterType.swift in Sources */,
+				0AF1A3B12BFC29A5002433E5 /* PodcastEndPoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
