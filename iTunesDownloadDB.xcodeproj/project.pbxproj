@@ -28,6 +28,8 @@
 		0AF1A3BF2BFC29B5002433E5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A3BB2BFC29B5002433E5 /* ContentView.swift */; };
 		0AF1A3C02BFC29B5002433E5 /* EpisodeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A3BC2BFC29B5002433E5 /* EpisodeRow.swift */; };
 		0AF1A3C12BFC29B5002433E5 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A3BD2BFC29B5002433E5 /* HomeViewModel.swift */; };
+		0AF1A3C32BFC312F002433E5 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A3C22BFC312F002433E5 /* DataController.swift */; };
+		0AF1A3C72BFC323F002433E5 /* iTunesDownloadDB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A3C52BFC323F002433E5 /* iTunesDownloadDB.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +55,8 @@
 		0AF1A3BB2BFC29B5002433E5 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0AF1A3BC2BFC29B5002433E5 /* EpisodeRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EpisodeRow.swift; sourceTree = "<group>"; };
 		0AF1A3BD2BFC29B5002433E5 /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		0AF1A3C22BFC312F002433E5 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		0AF1A3C62BFC323F002433E5 /* iTunesDownloadDB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iTunesDownloadDB.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +92,7 @@
 				0A70DB962BFBA537007C8AAB /* iTunesDownloadDBApp.swift */,
 				0AF1A3BE2BFC29B5002433E5 /* View */,
 				0AF1A3AB2BFC29A5002433E5 /* Model */,
+				0AF1A3C42BFC31D1002433E5 /* Database */,
 				0AF1A3A92BFC29A5002433E5 /* Networking */,
 				0A70DB9A2BFBA538007C8AAB /* Assets.xcassets */,
 				0A70DB9C2BFBA538007C8AAB /* Preview Content */,
@@ -174,6 +179,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		0AF1A3C42BFC31D1002433E5 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				0AF1A3C22BFC312F002433E5 /* DataController.swift */,
+				0AF1A3C52BFC323F002433E5 /* iTunesDownloadDB.xcdatamodeld */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -245,10 +259,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				0AF1A3B72BFC29A5002433E5 /* HTTPTask.swift in Sources */,
+				0AF1A3C72BFC323F002433E5 /* iTunesDownloadDB.xcdatamodeld in Sources */,
 				0AF1A3AF2BFC29A5002433E5 /* ParameterEncoding.swift in Sources */,
 				0AF1A3B22BFC29A5002433E5 /* ThumbnailEndPoint.swift in Sources */,
 				0AF1A3C12BFC29B5002433E5 /* HomeViewModel.swift in Sources */,
 				0AF1A3B42BFC29A5002433E5 /* Download.swift in Sources */,
+				0AF1A3C32BFC312F002433E5 /* DataController.swift in Sources */,
 				0AF1A3B32BFC29A5002433E5 /* NetworkManager.swift in Sources */,
 				0AF1A3AD2BFC29A5002433E5 /* NetworkError.swift in Sources */,
 				0AF1A3B82BFC29A5002433E5 /* Router.swift in Sources */,
@@ -468,6 +484,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		0AF1A3C52BFC323F002433E5 /* iTunesDownloadDB.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				0AF1A3C62BFC323F002433E5 /* iTunesDownloadDB.xcdatamodel */,
+			);
+			currentVersion = 0AF1A3C62BFC323F002433E5 /* iTunesDownloadDB.xcdatamodel */;
+			name = iTunesDownloadDB.xcdatamodeld;
+			path = /Users/ssonkar/Desktop/Swift/Architecture/Database/iTunesDownloadDB/iTunesDownloadDB/Database/iTunesDownloadDB.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 0A70DB8B2BFBA537007C8AAB /* Project object */;
 }
