@@ -29,7 +29,7 @@ import Foundation
  */
 
 
-struct Podcast: Decodable {
+struct Podcast: Codable {
     var id: Int?
     let title: String
     let artist: String
@@ -81,8 +81,8 @@ struct Podcast: Decodable {
     }
 }
 
-struct Episode: Identifiable, Decodable {
-    let id: Int?
+struct Episode: Identifiable, Codable {
+    var id: Int?
     let podcastID: Int
     let duration: Duration
     let title: String
