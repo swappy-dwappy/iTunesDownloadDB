@@ -5,11 +5,12 @@
 //  Created by Sonkar, Swapnil on 15/05/24.
 //
 
+import CoreData
 import SwiftUI
 
 struct ContentView: View {
     
-    @Environment(\.managedObjectContext) private var moc
+//    @Environment(\.managedObjectContext) private var moc
     @StateObject private var viewModel = HomeViewModel()
     
     var body: some View {
