@@ -10,6 +10,8 @@
 		0A70DB972BFBA537007C8AAB /* iTunesDownloadDBApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A70DB962BFBA537007C8AAB /* iTunesDownloadDBApp.swift */; };
 		0A70DB9B2BFBA538007C8AAB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A70DB9A2BFBA538007C8AAB /* Assets.xcassets */; };
 		0A70DB9E2BFBA538007C8AAB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A70DB9D2BFBA538007C8AAB /* Preview Assets.xcassets */; };
+		0AE825F92C0312E9006B0157 /* CoreDataPersistableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE825F82C0312E9006B0157 /* CoreDataPersistableType.swift */; };
+		0AE825FB2C0323E9006B0157 /* Podcast+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE825FA2C0323E9006B0157 /* Podcast+CoreData.swift */; };
 		0AF1A3AC2BFC29A5002433E5 /* JSONParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A3972BFC29A5002433E5 /* JSONParameterEncoder.swift */; };
 		0AF1A3AD2BFC29A5002433E5 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A3982BFC29A5002433E5 /* NetworkError.swift */; };
 		0AF1A3AE2BFC29A5002433E5 /* ParameterEncoderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A3992BFC29A5002433E5 /* ParameterEncoderType.swift */; };
@@ -28,7 +30,7 @@
 		0AF1A3BF2BFC29B5002433E5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A3BB2BFC29B5002433E5 /* ContentView.swift */; };
 		0AF1A3C02BFC29B5002433E5 /* EpisodeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A3BC2BFC29B5002433E5 /* EpisodeRow.swift */; };
 		0AF1A3C12BFC29B5002433E5 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A3BD2BFC29B5002433E5 /* HomeViewModel.swift */; };
-		0AF1A3C32BFC312F002433E5 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A3C22BFC312F002433E5 /* DataController.swift */; };
+		0AF1A3C32BFC312F002433E5 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A3C22BFC312F002433E5 /* PersistenceController.swift */; };
 		0AF1A3C72BFC323F002433E5 /* iTunesDownloadDB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A3C52BFC323F002433E5 /* iTunesDownloadDB.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +39,8 @@
 		0A70DB962BFBA537007C8AAB /* iTunesDownloadDBApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTunesDownloadDBApp.swift; sourceTree = "<group>"; };
 		0A70DB9A2BFBA538007C8AAB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A70DB9D2BFBA538007C8AAB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		0AE825F82C0312E9006B0157 /* CoreDataPersistableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataPersistableType.swift; sourceTree = "<group>"; };
+		0AE825FA2C0323E9006B0157 /* Podcast+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Podcast+CoreData.swift"; sourceTree = "<group>"; };
 		0AF1A3972BFC29A5002433E5 /* JSONParameterEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParameterEncoder.swift; sourceTree = "<group>"; };
 		0AF1A3982BFC29A5002433E5 /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		0AF1A3992BFC29A5002433E5 /* ParameterEncoderType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterEncoderType.swift; sourceTree = "<group>"; };
@@ -55,7 +59,7 @@
 		0AF1A3BB2BFC29B5002433E5 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0AF1A3BC2BFC29B5002433E5 /* EpisodeRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EpisodeRow.swift; sourceTree = "<group>"; };
 		0AF1A3BD2BFC29B5002433E5 /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		0AF1A3C22BFC312F002433E5 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		0AF1A3C22BFC312F002433E5 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		0AF1A3C62BFC323F002433E5 /* iTunesDownloadDB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iTunesDownloadDB.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -106,6 +110,14 @@
 				0A70DB9D2BFBA538007C8AAB /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		0AE825FC2C0323ED006B0157 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				0AE825FA2C0323E9006B0157 /* Podcast+CoreData.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		0AF1A39C2BFC29A5002433E5 /* Encoding */ = {
@@ -182,7 +194,9 @@
 		0AF1A3C42BFC31D1002433E5 /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				0AF1A3C22BFC312F002433E5 /* DataController.swift */,
+				0AF1A3C22BFC312F002433E5 /* PersistenceController.swift */,
+				0AE825F82C0312E9006B0157 /* CoreDataPersistableType.swift */,
+				0AE825FC2C0323ED006B0157 /* Extension */,
 				0AF1A3C52BFC323F002433E5 /* iTunesDownloadDB.xcdatamodeld */,
 			);
 			path = Database;
@@ -264,11 +278,12 @@
 				0AF1A3B22BFC29A5002433E5 /* ThumbnailEndPoint.swift in Sources */,
 				0AF1A3C12BFC29B5002433E5 /* HomeViewModel.swift in Sources */,
 				0AF1A3B42BFC29A5002433E5 /* Download.swift in Sources */,
-				0AF1A3C32BFC312F002433E5 /* DataController.swift in Sources */,
+				0AF1A3C32BFC312F002433E5 /* PersistenceController.swift in Sources */,
 				0AF1A3B32BFC29A5002433E5 /* NetworkManager.swift in Sources */,
 				0AF1A3AD2BFC29A5002433E5 /* NetworkError.swift in Sources */,
 				0AF1A3B82BFC29A5002433E5 /* Router.swift in Sources */,
 				0AF1A3BA2BFC29A5002433E5 /* PodcastModel.swift in Sources */,
+				0AE825F92C0312E9006B0157 /* CoreDataPersistableType.swift in Sources */,
 				0A70DB972BFBA537007C8AAB /* iTunesDownloadDBApp.swift in Sources */,
 				0AF1A3B02BFC29A5002433E5 /* URLParameterEncoder.swift in Sources */,
 				0AF1A3B52BFC29A5002433E5 /* EndPointType.swift in Sources */,
@@ -278,6 +293,7 @@
 				0AF1A3C02BFC29B5002433E5 /* EpisodeRow.swift in Sources */,
 				0AF1A3AC2BFC29A5002433E5 /* JSONParameterEncoder.swift in Sources */,
 				0AF1A3B92BFC29A5002433E5 /* RouterType.swift in Sources */,
+				0AE825FB2C0323E9006B0157 /* Podcast+CoreData.swift in Sources */,
 				0AF1A3B12BFC29A5002433E5 /* PodcastEndPoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

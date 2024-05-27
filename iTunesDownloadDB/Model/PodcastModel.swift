@@ -30,7 +30,7 @@ import Foundation
 
 
 struct Podcast: Decodable {
-    let id: Int
+    var id: Int?
     let title: String
     let artist: String
     let imageURL: URL
@@ -82,7 +82,7 @@ struct Podcast: Decodable {
 }
 
 struct Episode: Identifiable, Decodable {
-    let id: Int
+    let id: Int?
     let podcastID: Int
     let duration: Duration
     let title: String

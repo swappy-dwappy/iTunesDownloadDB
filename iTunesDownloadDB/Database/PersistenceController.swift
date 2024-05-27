@@ -7,7 +7,9 @@
 
 import CoreData
 
-class DataController {
+class PersistenceController: ObservableObject {
+    static let shared = PersistenceController()
+    
     let container = NSPersistentContainer(name: "iTunesDownloadDBApp")
     
     init() {
@@ -18,5 +20,6 @@ class DataController {
         }
         
         self.container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+        self.container.viewContext.automaticallyMergesChangesFromParent = true
     }
 }

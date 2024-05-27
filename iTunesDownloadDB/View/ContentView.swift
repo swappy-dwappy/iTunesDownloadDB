@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @Environment(\.managedObjectContext) private var moc
     @StateObject private var viewModel = HomeViewModel()
     
     var body: some View {
