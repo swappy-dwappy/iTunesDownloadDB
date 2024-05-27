@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct iTunesDownloadDBApp: App {
     
-    @StateObject private var persistenceController = PersistenceController()
+    @StateObject private var persistenceController = PersistenceController.shared
     
     var body: some Scene {
         WindowGroup {
