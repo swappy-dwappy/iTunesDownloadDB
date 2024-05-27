@@ -81,17 +81,3 @@ struct Podcast: Codable {
     }
 }
 
-extension Podcast {
-    
-    var keyMap: [PartialKeyPath<Podcast>: String] {
-        [
-             \.id: "id",
-             \.title: "title",
-             \.artist: "artist",
-             \.imageURL: "imageURL",
-             \.episodes: "episodes"
-        ]
-    }
-    
-    typealias ManagedType = PodcastEntity
-}
