@@ -59,6 +59,8 @@ extension CoreDataPersistableType where ManagedType: NSManagedObject {
         self[keyPath: keyPath] = value as? Bool
       case let keyPath as WritableKeyPath<Self, Double?>:
           self[keyPath: keyPath] = value as? Double
+      case let keyPath as WritableKeyPath<Self, Date?>:
+          self[keyPath: keyPath] = value as? Date
       default:
         return
       }
