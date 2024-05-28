@@ -36,6 +36,13 @@ struct Podcast: Codable {
     let imageURL: URL
     var episodes: [Episode]
     
+    init() {
+        self.title = ""
+        self.artist = ""
+        self.imageURL = URL(string: "https:\\www.google.com")!
+        self.episodes = []
+    }
+    
     subscript (episodeID: Episode.ID) -> Episode? {
         get {
             return episodes.first { $0.id == episodeID }
@@ -77,7 +84,7 @@ struct Podcast: Codable {
     
     var directoryURL: URL {
         URL.documentsDirectory
-            .appending(path: "\(id)", directoryHint: .isDirectory)
+            .appending(path: "\(String(describing: id))", directoryHint: .isDirectory)
     }
 }
 

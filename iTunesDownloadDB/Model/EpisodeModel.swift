@@ -37,6 +37,14 @@ struct Episode: Identifiable, Codable {
         case url = "episodeUrl"
     }
     
+    init() {
+        self.podcastID = 0
+        self.duration = .zero
+        self.title = ""
+        self.date = Date()
+        self.url = URL(string: "https:\\www.google.com")!
+    }
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decode(Int.self, forKey: .id)
@@ -51,7 +59,7 @@ struct Episode: Identifiable, Codable {
     var fileURL: URL {
         URL.documentsDirectory
             .appending(path: "\(podcastID)")
-            .appending(path: "\(id)")
+            .appending(path: "\(String(describing: id))")
             .appendingPathExtension("mp3")
     }
 }

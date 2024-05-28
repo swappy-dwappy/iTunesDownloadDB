@@ -13,6 +13,7 @@
 		0AE825F92C0312E9006B0157 /* CoreDataPersistableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE825F82C0312E9006B0157 /* CoreDataPersistableType.swift */; };
 		0AE825FB2C0323E9006B0157 /* Podcast+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE825FA2C0323E9006B0157 /* Podcast+CoreData.swift */; };
 		0AE825FE2C04BCEB006B0157 /* EpisodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE825FD2C04BCEB006B0157 /* EpisodeModel.swift */; };
+		0AE826082C057066006B0157 /* Episode+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE826072C057066006B0157 /* Episode+CoreData.swift */; };
 		0AF1A3AC2BFC29A5002433E5 /* JSONParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A3972BFC29A5002433E5 /* JSONParameterEncoder.swift */; };
 		0AF1A3AD2BFC29A5002433E5 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A3982BFC29A5002433E5 /* NetworkError.swift */; };
 		0AF1A3AE2BFC29A5002433E5 /* ParameterEncoderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1A3992BFC29A5002433E5 /* ParameterEncoderType.swift */; };
@@ -43,6 +44,7 @@
 		0AE825F82C0312E9006B0157 /* CoreDataPersistableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataPersistableType.swift; sourceTree = "<group>"; };
 		0AE825FA2C0323E9006B0157 /* Podcast+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Podcast+CoreData.swift"; sourceTree = "<group>"; };
 		0AE825FD2C04BCEB006B0157 /* EpisodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeModel.swift; sourceTree = "<group>"; };
+		0AE826072C057066006B0157 /* Episode+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Episode+CoreData.swift"; sourceTree = "<group>"; };
 		0AF1A3972BFC29A5002433E5 /* JSONParameterEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParameterEncoder.swift; sourceTree = "<group>"; };
 		0AF1A3982BFC29A5002433E5 /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		0AF1A3992BFC29A5002433E5 /* ParameterEncoderType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterEncoderType.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				0AE825FA2C0323E9006B0157 /* Podcast+CoreData.swift */,
+				0AE826072C057066006B0157 /* Episode+CoreData.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				0AF1A3B02BFC29A5002433E5 /* URLParameterEncoder.swift in Sources */,
 				0AF1A3B52BFC29A5002433E5 /* EndPointType.swift in Sources */,
 				0AF1A3AE2BFC29A5002433E5 /* ParameterEncoderType.swift in Sources */,
+				0AE826082C057066006B0157 /* Episode+CoreData.swift in Sources */,
 				0AF1A3B62BFC29A5002433E5 /* HTTPMethod.swift in Sources */,
 				0AF1A3BF2BFC29B5002433E5 /* ContentView.swift in Sources */,
 				0AF1A3C02BFC29B5002433E5 /* EpisodeRow.swift in Sources */,
