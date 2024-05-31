@@ -10,7 +10,7 @@ import CoreData
 class PersistenceController: ObservableObject {
     static let shared = PersistenceController()
     
-    let container = NSPersistentContainer(name: "iTunesDownloadDBApp")
+    let container = NSPersistentContainer(name: "iTunesDownloadDB")
     
     init() {
         container.loadPersistentStores { NSEntityDescription, error in
