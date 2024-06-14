@@ -5,18 +5,20 @@
 //  Created by Sonkar, Swapnil on 28/05/24.
 //
 
-extension Episode: CoreDataPersistableType {
+extension EpisodeEntity: SafeObjectType {
     
-    var keyMap: [PartialKeyPath<Episode> : String] {
-        [
-             \.id: "id",
-             \.podcastID: "podcastID",
-             \.duration: "duration",
-             \.title: "title",
-             \.date: "date",
-             \.url: "url"
-        ]
+    static func create(safe: Episode) -> EpisodeEntity {
+        let entity = EpisodeEntity(context: mainContext)
+        entity.id = Int64(safe.id ?? 0)
+        entity.duration = Int64(safe.duration.formatted()) ?? 0
+        entity.title = safe.title
+        entity.date = safe.date
+        entity.url = safe.url
+        return entity
     }
     
-    typealias ManagedType = EpisodeEntity
+    func toSafeObject() -> Episode {
+        let episode = Episode(id: Int(id), podcastID: Int(podcastID), duration: .milliseconds(duration), title: title ?? "", date: date ?? .now, url: url!, currentBytes: 0, totalBytes: 0)
+        return episode
+    }
 }
