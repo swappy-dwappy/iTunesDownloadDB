@@ -1,5 +1,5 @@
 //
-//  EpisodeModel.swift
+//  Episode.swift
 //  iTunesDownloadDB
 //
 //  Created by Sonkar, Swapnil on 27/05/24.
@@ -37,12 +37,16 @@ struct Episode: Identifiable, Codable {
         case url = "episodeUrl"
     }
     
-    init() {
-        self.podcastID = 0
-        self.duration = .zero
-        self.title = ""
-        self.date = Date()
-        self.url = URL(string: "https:\\www.google.com")!
+    init(id: Int? = nil, podcastID: Int, duration: Duration, title: String, date: Date, url: URL, isDownloading: Bool = false, currentBytes: Int64, totalBytes: Int64) {
+        self.id = id
+        self.podcastID = podcastID
+        self.duration = duration
+        self.title = title
+        self.date = date
+        self.url = url
+        self.isDownloading = isDownloading
+        self.currentBytes = currentBytes
+        self.totalBytes = totalBytes
     }
     
     init(from decoder: Decoder) throws {

@@ -1,5 +1,5 @@
 //
-//  PodcastModel.swift
+//  Podcast.swift
 //  iTunes
 //
 //  Created by Sonkar, Swapnil on 14/05/24.
@@ -35,12 +35,13 @@ struct Podcast: Codable {
     let artist: String
     let imageURL: URL
     var episodes: [Episode]
-    
-    init() {
-        self.title = ""
-        self.artist = ""
-        self.imageURL = URL(string: "https:\\www.google.com")!
-        self.episodes = []
+
+    init(id: Int? = nil, title: String, artist: String, imageURL: URL, episodes: [Episode]) {
+        self.id = id
+        self.title = title
+        self.artist = artist
+        self.imageURL = imageURL
+        self.episodes = episodes
     }
     
     subscript (episodeID: Episode.ID) -> Episode? {
