@@ -14,27 +14,42 @@ struct ContentView: View {
     @StateObject private var viewModel = HomeViewModel()
     
     var body: some View {
-        List {
-            HeaderView(podcast: viewModel.podcast)
-            
-            if let podcast = viewModel.podcast {
-                ForEach(podcast.episodes) { episode in
-                    EpisodeRow(episode: episode) {
-                        toggleDownload(for: episode)
+        NavigationStack {
+            List {
+                HeaderView(podcast: viewModel.podcast)
+                
+                if let podcast = viewModel.podcast {
+                    ForEach(podcast.episodes) { episode in
+                        EpisodeRow(episode: episode) {
+                            toggleDownload(for: episode)
+                        }
+                    }
+                } else {
+                    ForEach(0..<5) { _ in
+                        EpisodeRow(episode: nil, onButtonPressed: {})
                     }
                 }
-            } else {
-                ForEach(0..<5) { _ in
-                    EpisodeRow(episode: nil, onButtonPressed: {})
+            }
+            .navigationTitle("Podcast")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackground(.visible, for: .navigationBar)
+            .toolbarBackground(.gray, for: .navigationBar)
+            .alert("Error", isPresented: $viewModel.showPodcastAPIError, actions: {}) {
+                Text(viewModel.podcastAPIError?.localizedDescription ?? "Podcast API error!")
+            }
+            .listStyle(.plain)
+            .toolbar {
+                Button("", systemImage: "trash") {
+                    do {
+                        try persistenceController.deleteEntityInBackground(entityName: PodcastEntity.entity().name!)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                 }
             }
-        }
-        .alert("Error", isPresented: $viewModel.showPodcastAPIError, actions: {}) {
-            Text(viewModel.podcastAPIError?.localizedDescription ?? "Podcast API error!")
-        }
-        .listStyle(.plain)
-        .task {
-            await viewModel.fetchPodcast()
+            .task {
+                await viewModel.fetchPodcast()
+            }
         }
     }
 }

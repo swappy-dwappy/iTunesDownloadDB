@@ -25,14 +25,19 @@ extension HomeViewModel {
    
     @MainActor
     func fetchPodcast() async {
-        switch await NetworkManager().getPodcast(id: 1386867488, media: "podcast", entity: "podcastEpisode", limit: 10) {
-        case .success(let podcast):
-            self.podcast = podcast
-            
-        case .failure(let error):
-            podcastAPIError = error
-            showPodcastAPIError = true
-            print(error)
+        podcast = persistenceController.getSafeObject(entity: PodcastEntity.self).first
+        if podcast == nil {
+            switch await NetworkManager().getPodcast(id: 1386867488, media: "podcast", entity: "podcastEpisode", limit: 10) {
+            case .success(let podcast):
+                self.podcast = podcast
+                let _ = PodcastEntity.create(safe: podcast)
+                try? persistenceController.saveContext()
+                
+            case .failure(let error):
+                podcastAPIError = error
+                showPodcastAPIError = true
+                print(error)
+            }
         }
     }
     
