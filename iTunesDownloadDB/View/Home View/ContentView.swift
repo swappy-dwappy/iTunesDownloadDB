@@ -43,6 +43,7 @@ struct ContentView: View {
                     do {
                         try persistenceController.deleteEntityInBackground(entityName: PodcastEntity.entity().name!)
                     } catch {
+                        //TODO: Show some error
                         print(error.localizedDescription)
                     }
                 }
