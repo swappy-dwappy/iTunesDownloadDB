@@ -58,7 +58,14 @@ extension PersistenceController {
     }
     
     
-    func deleteAllEntities() {
+    func deleteAllEntities() throws {
+        let entities = PCShared.container.managedObjectModel.entities
+
+        for entity in entities {
+            if let entityName = entity.name {
+                try deleteEntityInBackground(entityName: entityName)
+            }
+        }
     }
     
     func deleteEntity(entityName: String) throws {
