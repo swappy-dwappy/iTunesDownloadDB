@@ -29,7 +29,7 @@ class HomeViewModel: NSObject, ObservableObject {
 
 extension HomeViewModel {
     func refreshDBFetch() {
-        podcast = persistenceController.getSafeObject(entity: PodcastEntity.self).first
+        podcast = PCShared.getSafeObject(entity: PodcastEntity.self).first
     }
 }
 

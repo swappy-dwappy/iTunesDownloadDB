@@ -7,7 +7,7 @@
 
 import CoreData
 
-let persistenceController = PersistenceController.shared
+let PCShared = PersistenceController.shared
 let mainContext = PersistenceController.shared.container.viewContext
 
 class PersistenceController: ObservableObject {
@@ -86,7 +86,7 @@ extension PersistenceController {
     
     func deleteEntityInBackgroundAlternative(entityName: String) async throws {
         
-        try await persistenceController.container.performBackgroundTask { context in
+        try await PCShared.container.performBackgroundTask { context in
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
             let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
             deleteRequest.resultType = .resultTypeObjectIDs
