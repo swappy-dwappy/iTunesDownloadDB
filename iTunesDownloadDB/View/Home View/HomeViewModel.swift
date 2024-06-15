@@ -5,6 +5,7 @@
 //  Created by Sonkar, Swapnil on 18/05/24.
 //
 
+import Combine
 import Foundation
 
 class HomeViewModel: NSObject, ObservableObject {
@@ -13,11 +14,23 @@ class HomeViewModel: NSObject, ObservableObject {
     var podcastAPIError: Error?
     @Published var podcast: Podcast?
     private var downloads: [URL: Download] = [:]
+    var cancellables = Set<AnyCancellable>()
+    let podcastService: PodcastServiceType
     
     private lazy var downloadSession: URLSession = {
         let configuration = URLSessionConfiguration.default
         return URLSession(configuration: configuration, delegate: nil, delegateQueue: .main)
     }()
+    
+    init(podcastType: PodcastServiceType = PodcastService()) {
+        self.podcastService = podcastType
+    }
+}
+
+extension HomeViewModel {
+    func refreshDBFetch() {
+        podcast = persistenceController.getSafeObject(entity: PodcastEntity.self).first
+    }
 }
 
 // API
@@ -25,20 +38,16 @@ extension HomeViewModel {
    
     @MainActor
     func fetchPodcast() async {
-        podcast = persistenceController.getSafeObject(entity: PodcastEntity.self).first
-        if podcast == nil {
-            switch await NetworkManager().getPodcast(id: 1386867488, media: "podcast", entity: "podcastEpisode", limit: 10) {
-            case .success(let podcast):
-                self.podcast = podcast
-                let _ = PodcastEntity.create(safe: podcast)
-                try? persistenceController.saveContext()
-                
-            case .failure(let error):
-                podcastAPIError = error
-                showPodcastAPIError = true
-                print(error)
-            }
+        switch await podcastService.getPodcast() {
+        case .success(let podcast):
+            self.podcast = podcast
+            
+        case .failure(let error):
+            podcastAPIError = error
+            showPodcastAPIError = true
+            print(error)
         }
+        
     }
     
     @MainActor
