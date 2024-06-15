@@ -57,6 +57,7 @@ extension PersistenceController {
         }
     }
     
+    
     func deleteAllEntities() {
     }
     
@@ -65,22 +66,16 @@ extension PersistenceController {
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         deleteRequest.resultType = .resultTypeObjectIDs
         
-        let batchDelete = try mainContext.execute(deleteRequest) as? NSBatchDeleteResult
-        
-        guard let deleteResult = batchDelete?.result as? [NSManagedObjectID] else { return }
-        
-        let deletedObjects: [AnyHashable: Any] = [NSDeletedObjectsKey: deleteResult]
-        
-        NSManagedObjectContext.mergeChanges(fromRemoteContextSave: deletedObjects, into: [mainContext])
+        try mainContext.execute(deleteRequest)
     }
     
     func deleteEntityInBackground(entityName: String) throws {
-        
+
         try privateContext.performAndWait {
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
             let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
             deleteRequest.resultType = .resultTypeObjectIDs
-            
+
             let batchDelete = try privateContext.execute(deleteRequest) as? NSBatchDeleteResult
 
             guard let deleteResult = batchDelete?.result as? [NSManagedObjectID] else { return }
@@ -93,8 +88,18 @@ extension PersistenceController {
     
     func deleteEntityInBackgroundAlternative(entityName: String) async throws {
         
-        await persistenceController.container.performBackgroundTask { context in
+        try await persistenceController.container.performBackgroundTask { context in
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            deleteRequest.resultType = .resultTypeObjectIDs
             
+            let batchDelete = try context.execute(deleteRequest) as? NSBatchDeleteResult
+
+            guard let deleteResult = batchDelete?.result as? [NSManagedObjectID] else { return }
+            
+            let deletedObjects: [AnyHashable: Any] = [NSDeletedObjectsKey: deleteResult]
+            
+            NSManagedObjectContext.mergeChanges(fromRemoteContextSave: deletedObjects, into: [mainContext])
         }
     }
 }
