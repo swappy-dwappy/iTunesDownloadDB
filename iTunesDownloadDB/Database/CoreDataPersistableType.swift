@@ -66,7 +66,7 @@ extension CoreDataPersistableType where ManagedType: NSManagedObject {
       }
     }
     
-    mutating func toManagedObject(context: NSManagedObjectContext = PersistenceController.shared.container.viewContext) -> ManagedType {
+    mutating func toManagedObject(context: NSManagedObjectContext = PCShared.container.viewContext) -> ManagedType {
         let persistedValue: ManagedType
         if let id = self.id {
             let fetchRequest = ManagedType.fetchRequest()
@@ -99,7 +99,7 @@ extension CoreDataPersistableType where ManagedType: NSManagedObject {
       return persistedValue
     }
     
-    func save(context: NSManagedObjectContext = PersistenceController.shared.container.viewContext) throws {
+    func save(context: NSManagedObjectContext = PCShared.container.viewContext) throws {
       try context.save()
     }
 }

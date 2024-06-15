@@ -41,7 +41,7 @@ struct ContentView: View {
             .toolbar {
                 Button("", systemImage: "trash") {
                     do {
-                        try persistenceController.deleteEntityInBackground(entityName: PodcastEntity.entity().name!)
+                        try PCShared.deleteEntityInBackground(entityName: PodcastEntity.entity().name!)
                     } catch {
                         //TODO: Show some error
                         print(error.localizedDescription)

@@ -8,7 +8,7 @@
 import CoreData
 
 let PCShared = PersistenceController.shared
-let mainContext = PersistenceController.shared.container.viewContext
+let mainContext = PCShared.container.viewContext
 
 class PersistenceController: ObservableObject {
     static let shared = PersistenceController()
@@ -33,7 +33,7 @@ class PersistenceController: ObservableObject {
     }
     
     lazy var privateContext: NSManagedObjectContext = {
-        return PersistenceController.shared.container.newBackgroundContext()
+        return PCShared.container.newBackgroundContext()
     }()
     
 }
