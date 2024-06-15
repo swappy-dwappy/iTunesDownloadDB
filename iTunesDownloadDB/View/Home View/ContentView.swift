@@ -41,7 +41,13 @@ struct ContentView: View {
             .toolbar {
                 Button("", systemImage: "trash") {
                     do {
-                        try PCShared.deleteEntityInBackground(entityName: PodcastEntity.entity().name!)
+                        let isDeleted = try PCShared.deleteEntityInBackground(entityName: PodcastEntity.entity().name!)
+                        if isDeleted {
+                            viewModel.refreshDBFetch()
+                            Task {
+                                await viewModel.fetchPodcast()
+                            }
+                        }
                     } catch {
                         //TODO: Show some error
                         print(error.localizedDescription)

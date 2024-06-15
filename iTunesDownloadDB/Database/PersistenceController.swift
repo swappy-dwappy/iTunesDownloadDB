@@ -63,31 +63,31 @@ extension PersistenceController {
 
         for entity in entities {
             if let entityName = entity.name {
-                try deleteEntityInBackground(entityName: entityName)
+                _ = try deleteEntityInBackground(entityName: entityName)
             }
         }
     }
     
-    func deleteEntity(entityName: String) throws {
+    func deleteEntity(entityName: String) throws -> Bool {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)        
-        try mainContext.execute(deleteRequest)
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)  
+        deleteRequest.resultType = .resultTypeStatusOnly
+
+        let batchDelete = try mainContext.execute(deleteRequest) as? NSBatchDeleteResult
+        
+        return batchDelete?.result as? Bool ?? false
     }
     
-    func deleteEntityInBackground(entityName: String) throws {
+    func deleteEntityInBackground(entityName: String) throws -> Bool {
 
-        try privateContext.performAndWait {
+        return try privateContext.performAndWait {
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
             let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-            deleteRequest.resultType = .resultTypeObjectIDs
+            deleteRequest.resultType = .resultTypeStatusOnly
 
             let batchDelete = try privateContext.execute(deleteRequest) as? NSBatchDeleteResult
 
-            guard let deleteResult = batchDelete?.result as? [NSManagedObjectID] else { return }
-            
-            let deletedObjects: [AnyHashable: Any] = [NSDeletedObjectsKey: deleteResult]
-            
-            NSManagedObjectContext.mergeChanges(fromRemoteContextSave: deletedObjects, into: [mainContext])
+            return batchDelete?.result as? Bool ?? false
         }
     }
     

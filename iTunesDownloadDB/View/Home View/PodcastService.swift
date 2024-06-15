@@ -15,7 +15,7 @@ class PodcastService: PodcastServiceType {
         if let podcast = PCShared.getSafeObject(entity: PodcastEntity.self).first {
             return .success(podcast)
         } else {
-            let result = await NetworkManager().getPodcast(id: 1386867488, media: "podcast", entity: "podcastEpisode", limit: 10)
+            let result = await NetworkManager().getPodcast(id: 1386867488, media: "podcast", entity: "podcastEpisode", limit: 1000000)
             switch result {
             case let .success(podcast):
                 let _ = PodcastEntity.create(safe: podcast)
