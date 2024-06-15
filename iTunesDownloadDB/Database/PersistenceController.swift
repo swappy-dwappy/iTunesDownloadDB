@@ -63,9 +63,7 @@ extension PersistenceController {
     
     func deleteEntity(entityName: String) throws {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        deleteRequest.resultType = .resultTypeObjectIDs
-        
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)        
         try mainContext.execute(deleteRequest)
     }
     
