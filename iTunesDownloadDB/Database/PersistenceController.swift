@@ -6,7 +6,7 @@
 //
 
 import CoreData
-
+//TODO: Blob
 let PCShared = PersistenceController.shared
 let mainContext = PCShared.container.viewContext
 
