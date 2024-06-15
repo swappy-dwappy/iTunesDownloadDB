@@ -12,6 +12,6 @@ protocol SafeObjectType: NSManagedObject {
     associatedtype SafeType
     associatedtype ManagedType: NSManagedObject
     
-    static func create(safe: SafeType) -> ManagedType
+    static func create(safe: SafeType, with context: NSManagedObjectContext) -> ManagedType
     func toSafeObject() -> SafeType
 }

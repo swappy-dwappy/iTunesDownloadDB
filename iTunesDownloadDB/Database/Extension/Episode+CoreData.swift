@@ -5,10 +5,12 @@
 //  Created by Sonkar, Swapnil on 28/05/24.
 //
 
+import CoreData
+
 extension EpisodeEntity: SafeObjectType {
     
-    static func create(safe: Episode) -> EpisodeEntity {
-        let entity = EpisodeEntity(context: mainContext)
+    static func create(safe: Episode, with context: NSManagedObjectContext = mainContext) -> EpisodeEntity {
+        let entity = EpisodeEntity(context: context)
         entity.id = Int64(safe.id ?? 0)
         entity.duration = Int64(safe.duration.formatted()) ?? 0
         entity.title = safe.title

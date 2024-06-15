@@ -5,12 +5,12 @@
 //  Created by Sonkar, Swapnil on 26/05/24.
 //
 
-import Foundation
+import CoreData
 
 extension PodcastEntity: SafeObjectType {
     
-    static func create(safe: Podcast) -> PodcastEntity {
-        let enitity = PodcastEntity(context: mainContext)
+    static func create(safe: Podcast, with context: NSManagedObjectContext = mainContext) -> PodcastEntity {
+        let enitity = PodcastEntity(context: context)
         enitity.id = Int64(safe.id ?? 0)
         enitity.title = safe.title
         enitity.artist = safe.artist
