@@ -31,6 +31,18 @@ extension HomeViewModel {
     func refreshDBFetch() {
         podcast = PCShared.getSafeObject(entity: PodcastEntity.self).first
     }
+    
+    func deleteEpisode(at offset: IndexSet) {
+        if let index = offset.first, let episode = podcast?.episodes[index], let id = episode.id {
+            let predicate = NSPredicate(format: "id == \"\(id)\"")
+            let isDeleted = (try? PCShared.deleteEntity(entity: EpisodeEntity.self, predicates: [predicate])) ?? false
+            if isDeleted {
+                refreshDBFetch()
+            } else {
+                print("Wrong")
+            }
+        }
+    }
 }
 
 // API
@@ -47,7 +59,6 @@ extension HomeViewModel {
             showPodcastAPIError = true
             print(error)
         }
-        
     }
     
     @MainActor

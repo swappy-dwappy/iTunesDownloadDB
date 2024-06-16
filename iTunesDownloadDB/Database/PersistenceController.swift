@@ -26,9 +26,9 @@ class PersistenceController: ObservableObject {
         self.container.viewContext.automaticallyMergesChangesFromParent = true
     }
     
-    func saveContext() throws {
-        if mainContext.hasChanges {
-            try mainContext.save()
+    func save(context: NSManagedObjectContext = mainContext) throws {
+        if context.hasChanges {
+            try context.save()
         }
     }
     
@@ -40,8 +40,15 @@ class PersistenceController: ObservableObject {
 
 extension PersistenceController {
     
-    func getEntity<E: NSManagedObject>() -> [E] {
+    private func fetchRequest<E: NSManagedObject>(entity: E.Type, predicates: [NSPredicate] = [], sortDescriptors: [SortDescriptor<E>] = []) -> NSFetchRequest<any NSFetchRequestResult> {
         let fetchRequest = E.fetchRequest()
+        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+        fetchRequest.sortDescriptors = sortDescriptors.map { NSSortDescriptor($0) }
+        
+        return fetchRequest
+    }
+    
+    private func getEntity<E: NSManagedObject>(fetchRequest: NSFetchRequest<any NSFetchRequestResult>) -> [E] {
         do {
             return try mainContext.fetch(fetchRequest) as? [E] ?? []
         } catch {
@@ -50,51 +57,66 @@ extension PersistenceController {
         return []
     }
     
-    func getSafeObject<E, S>(entity: E.Type) -> [S] where E: NSManagedObject, E: SafeObjectType, S == E.SafeType {
-        let entities = getEntity() as [E]
-        return entities.map {
-            $0.toSafeObject()
-        }
-    }
-    
-    
-    func deleteAllEntities() throws {
-        let entities = PCShared.container.managedObjectModel.entities
-
-        for entity in entities {
-            if let entityName = entity.name {
-                _ = try deleteEntityInBackground(entityName: entityName)
+    func getSafeObject<E, S>(entity: E.Type, predicates: [NSPredicate] = [], sortDescriptors: [SortDescriptor<E>] = []) -> [S] where E: NSManagedObject, E: SafeObjectType, S == E.SafeType {
+        let fetchRequest = fetchRequest(entity: E.self, predicates: predicates, sortDescriptors: sortDescriptors)
+        if let entities = getEntity(fetchRequest: fetchRequest) as? [E] {
+            return entities.map {
+                $0.toSafeObject()
             }
         }
+        return []
     }
     
-    func deleteEntity(entityName: String) throws -> Bool {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)  
-        deleteRequest.resultType = .resultTypeStatusOnly
+    
+//    func deleteAllEntities() throws {
+//        let entities = PCShared.container.managedObjectModel.entities
+//
+//        for entity in entities {
+//            if let entityName = entity.name {
+//                _ = try deleteEntityInBackground(entityName: entityName)
+//            }
+//        }
+//    }
+    
+    func deleteEntity<E: NSManagedObject>(entity: E.Type, predicates: [NSPredicate] = []) throws -> Bool {
+        let fetchRequest = fetchRequest(entity: E.self, predicates: predicates)
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        deleteRequest.resultType = .resultTypeObjectIDs
 
         let batchDelete = try mainContext.execute(deleteRequest) as? NSBatchDeleteResult
+
+        guard let deleteResult = batchDelete?.result as? [NSManagedObjectID] else { return false }
         
-        return batchDelete?.result as? Bool ?? false
+        let deletedObjects: [AnyHashable: Any] = [NSDeletedObjectsKey: deleteResult]
+        
+        NSManagedObjectContext.mergeChanges(fromRemoteContextSave: deletedObjects, into: [mainContext])
+        
+        return deleteResult.isEmpty == false
     }
     
-    func deleteEntityInBackground(entityName: String) throws -> Bool {
+    func deleteEntityInBackground<E: NSManagedObject>(entity: E.Type, predicates: [NSPredicate] = []) throws -> Bool {
 
         return try privateContext.performAndWait {
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+            let fetchRequest = fetchRequest(entity: entity.self, predicates: predicates)
             let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-            deleteRequest.resultType = .resultTypeStatusOnly
-
+            deleteRequest.resultType = .resultTypeObjectIDs
+            
             let batchDelete = try privateContext.execute(deleteRequest) as? NSBatchDeleteResult
 
-            return batchDelete?.result as? Bool ?? false
+            guard let deleteResult = batchDelete?.result as? [NSManagedObjectID] else { return false }
+            
+            let deletedObjects: [AnyHashable: Any] = [NSDeletedObjectsKey: deleteResult]
+            
+            NSManagedObjectContext.mergeChanges(fromRemoteContextSave: deletedObjects, into: [mainContext, privateContext])
+            
+            return deleteResult.isEmpty == false
         }
     }
     
-    func deleteEntityInBackgroundAlternative(entityName: String) async throws {
+    func deleteEntityInBackgroundAlternative<E: NSManagedObject>(entity: E.Type, predicates: [NSPredicate] = []) async throws {
         
         try await PCShared.container.performBackgroundTask { context in
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+            let fetchRequest = self.fetchRequest(entity: entity.self, predicates: predicates)
             let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
             deleteRequest.resultType = .resultTypeObjectIDs
             
@@ -104,7 +126,7 @@ extension PersistenceController {
             
             let deletedObjects: [AnyHashable: Any] = [NSDeletedObjectsKey: deleteResult]
             
-            NSManagedObjectContext.mergeChanges(fromRemoteContextSave: deletedObjects, into: [mainContext])
+            NSManagedObjectContext.mergeChanges(fromRemoteContextSave: deletedObjects, into: [mainContext, context])
         }
     }
 }

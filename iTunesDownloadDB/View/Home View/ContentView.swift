@@ -24,6 +24,7 @@ struct ContentView: View {
                             toggleDownload(for: episode)
                         }
                     }
+                    .onDelete(perform: viewModel.deleteEpisode)
                 } else {
                     ForEach(0..<5) { _ in
                         EpisodeRow(episode: nil, onButtonPressed: {})
@@ -41,7 +42,7 @@ struct ContentView: View {
             .toolbar {
                 Button("", systemImage: "trash") {
                     do {
-                        let isDeleted = try PCShared.deleteEntityInBackground(entityName: PodcastEntity.entity().name!)
+                        let isDeleted = try PCShared.deleteEntityInBackground(entity: PodcastEntity.self)
                         if isDeleted {
                             viewModel.refreshDBFetch()
                             Task {

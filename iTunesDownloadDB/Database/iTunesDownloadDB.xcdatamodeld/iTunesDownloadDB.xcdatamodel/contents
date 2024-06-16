@@ -7,7 +7,7 @@
         <attribute name="podcastID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="url" optional="YES" attributeType="URI"/>
-        <relationship name="podcast" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="PodcastEntity" inverseName="episodes" inverseEntity="PodcastEntity"/>
+        <relationship name="podcast" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PodcastEntity" inverseName="episodes" inverseEntity="PodcastEntity"/>
     </entity>
     <entity name="PodcastEntity" representedClassName="PodcastEntity" syncable="YES" codeGenerationType="class">
         <attribute name="artist" optional="YES" attributeType="String"/>
