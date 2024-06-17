@@ -176,6 +176,7 @@ extension PersistenceController {
         }
     }
     
+    // 5 Delete all Entities
     func deleteAllEntities() async {
         let entities = PCShared.container.managedObjectModel.entities
         
