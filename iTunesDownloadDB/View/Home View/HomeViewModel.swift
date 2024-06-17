@@ -29,12 +29,6 @@ class HomeViewModel: NSObject, ObservableObject {
 
 extension HomeViewModel {
     
-    func refreshDBFetch() {
-//        Task {@MainActor in
-//            self.podcast = await podcastService.getPodcast()
-//        }
-    }
-    
     func deleteEpisode(at offset: IndexSet) {
         if let index = offset.first, let episode = podcast?.episodes[index], let id = episode.id {
             let predicate = NSPredicate(format: "id == \"\(id)\"")
