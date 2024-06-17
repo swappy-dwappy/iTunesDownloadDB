@@ -30,10 +30,9 @@ class HomeViewModel: NSObject, ObservableObject {
 extension HomeViewModel {
     
     func refreshDBFetch() {
-        let podcast = PCShared.getSafeObject(entity: PodcastEntity.self).first
-        Task {@MainActor in
-            self.podcast = podcast
-        }
+//        Task {@MainActor in
+//            self.podcast = await podcastService.getPodcast()
+//        }
     }
     
     func deleteEpisode(at offset: IndexSet) {
@@ -41,7 +40,12 @@ extension HomeViewModel {
             let predicate = NSPredicate(format: "id == \"\(id)\"")
             let isDeleted = (try? PCShared.deleteEntity(entity: EpisodeEntity.self, predicates: [predicate])) ?? false
             if isDeleted {
-                refreshDBFetch()
+                if podcast?.episodes.count == 1 { // Delete Podcast once last episode is deleted
+                    _ = try? PCShared.deleteEntity(entity: PodcastEntity.self)
+                }
+                Task {
+                    await fetchPodcast()
+                }
             } else {
                 fatalError("Core Data Crash Swapnil")
             }
