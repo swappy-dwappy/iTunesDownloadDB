@@ -43,7 +43,7 @@ extension HomeViewModel {
             if isDeleted {
                 refreshDBFetch()
             } else {
-                print("Wrong")
+                fatalError("Core Data Crash Swapnil")
             }
         }
     }

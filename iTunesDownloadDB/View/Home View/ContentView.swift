@@ -43,16 +43,20 @@ struct ContentView: View {
                 Button("", systemImage: "trash") {
                     do {
                         // 1
-//                        try PCShared.deleteAllEntities()
-                        
-                        // 2
-                        let isDeleted = try PCShared.deleteEntity(entity: PodcastEntity.self)
-                        if isDeleted {
+                        Task {
+                            await PCShared.deleteAllEntities()
                             viewModel.refreshDBFetch()
-                            Task {
-                                await viewModel.fetchPodcast()
-                            }
+                            await viewModel.fetchPodcast()
                         }
+                        
+//                        // 2
+//                        let isDeleted = try PCShared.deleteEntity(entity: PodcastEntity.self)
+//                        if isDeleted {
+//                            viewModel.refreshDBFetch()
+//                            Task {
+//                                await viewModel.fetchPodcast()
+//                            }
+//                        }
                         
 //                        //3
 //                        let isDeleted = try PCShared.deleteEntityInBackground(entity: PodcastEntity.self)

@@ -95,15 +95,6 @@ extension PersistenceController {
         return []
     }
     
-//    func deleteAllEntities() throws {
-//        let entities = PCShared.container.managedObjectModel.entities
-//        
-//        for entity in entities {
-//            _ = try await deleteEntityInBackgroundAlternative(entity: type(of: managedObject))
-//        }
-//        
-//    }
-    
     // 4a Delete Entity
     func deleteEntity<E: NSManagedObject>(entity: E.Type, predicates: [NSPredicate] = []) throws -> Bool {
 
@@ -124,7 +115,7 @@ extension PersistenceController {
         }
     }
     
-    // 4b Delete Entity in background
+    // 4b Delete Entity
     func deleteEntityInBackground<E: NSManagedObject>(entity: E.Type, predicates: [NSPredicate] = []) throws -> Bool {
 
         return try privateContext.performAndWait {
@@ -145,10 +136,11 @@ extension PersistenceController {
     }
     
     // 4c Delete Entity in background
-    func deleteEntityInBackgroundAlternative<E: NSManagedObject>(entity: E.Type, predicates: [NSPredicate] = []) async throws -> Bool {
-        
+    func deleteEntity(entityName: String, predicates: [NSPredicate] = []) async throws -> Bool {
+
         return try await PCShared.container.performBackgroundTask { context in
-            let fetchRequest = self.fetchRequest(entity: entity.self, predicates: predicates)
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+            fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
             let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
             deleteRequest.resultType = .resultTypeObjectIDs
             
@@ -162,5 +154,36 @@ extension PersistenceController {
             
             return deleteResult.isEmpty == false
         }
+    }
+    
+    // 4d Delete Entity in background
+    func deleteEntityInBackgroundAlternative<E: NSManagedObject>(entity: E.Type, predicates: [NSPredicate] = []) async throws -> Bool {
+        
+        return try await PCShared.container.performBackgroundTask { [weak self] context in
+            guard let fetchRequest = self?.fetchRequest(entity: entity.self, predicates: predicates) else { return false }
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            deleteRequest.resultType = .resultTypeObjectIDs
+            
+            let batchDelete = try context.execute(deleteRequest) as? NSBatchDeleteResult
+
+            guard let deleteResult = batchDelete?.result as? [NSManagedObjectID] else { return false }
+            
+            let deletedObjects: [AnyHashable: Any] = [NSDeletedObjectsKey: deleteResult]
+            
+            NSManagedObjectContext.mergeChanges(fromRemoteContextSave: deletedObjects, into: [mainContext])
+            
+            return deleteResult.isEmpty == false
+        }
+    }
+    
+    func deleteAllEntities() async {
+        let entities = PCShared.container.managedObjectModel.entities
+        
+        for entity in entities {
+            if let entityName = entity.name {
+                _ = try? await deleteEntity(entityName: entityName)
+            }
+        }
+        
     }
 }
