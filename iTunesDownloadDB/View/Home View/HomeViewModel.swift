@@ -28,8 +28,12 @@ class HomeViewModel: NSObject, ObservableObject {
 }
 
 extension HomeViewModel {
+    
     func refreshDBFetch() {
-        podcast = PCShared.getSafeObject(entity: PodcastEntity.self).first
+        let podcast = PCShared.getSafeObject(entity: PodcastEntity.self).first
+        Task {@MainActor in
+            self.podcast = podcast
+        }
     }
     
     func deleteEpisode(at offset: IndexSet) {
