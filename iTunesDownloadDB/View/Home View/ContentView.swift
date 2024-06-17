@@ -42,13 +42,35 @@ struct ContentView: View {
             .toolbar {
                 Button("", systemImage: "trash") {
                     do {
-                        let isDeleted = try PCShared.deleteEntityInBackground(entity: PodcastEntity.self)
+                        // 1
+//                        try PCShared.deleteAllEntities()
+                        
+                        // 2
+                        let isDeleted = try PCShared.deleteEntity(entity: PodcastEntity.self)
                         if isDeleted {
                             viewModel.refreshDBFetch()
                             Task {
                                 await viewModel.fetchPodcast()
                             }
                         }
+                        
+//                        //3
+//                        let isDeleted = try PCShared.deleteEntityInBackground(entity: PodcastEntity.self)
+//                        if isDeleted {
+//                            viewModel.refreshDBFetch()
+//                            Task {
+//                                await viewModel.fetchPodcast()
+//                            }
+//                        }
+                        
+//                        //4
+//                        Task {
+//                            let isDeleted = try await PCShared.deleteEntityInBackgroundAlternative(entity: PodcastEntity.self)
+//                            if isDeleted {
+//                                viewModel.refreshDBFetch()
+//                                await viewModel.fetchPodcast()
+//                            }
+//                        }
                     } catch {
                         //TODO: Show some error
                         print(error.localizedDescription)

@@ -40,6 +40,7 @@ class PersistenceController: ObservableObject {
 
 extension PersistenceController {
     
+    // 1a Fetch Request
     private func fetchRequest<E: NSManagedObject>(entity: E.Type, predicates: [NSPredicate] = [], sortDescriptors: [SortDescriptor<E>] = []) -> NSFetchRequest<any NSFetchRequestResult> {
         let fetchRequest = E.fetchRequest()
         fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
@@ -48,15 +49,42 @@ extension PersistenceController {
         return fetchRequest
     }
     
+    // 1b Fetch Request
+    private func fetchRequest2(entityName: String, predicates: [NSPredicate] = [], sortId: String?) -> NSFetchRequest<NSManagedObject> {
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
+        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+        if let sortId = sortId {
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: sortId, ascending: true)]
+        }
+        
+        return fetchRequest
+    }
+    
+    // 2a Get Entity
     private func getEntity<E: NSManagedObject>(fetchRequest: NSFetchRequest<any NSFetchRequestResult>) -> [E] {
         do {
-            return try mainContext.fetch(fetchRequest) as? [E] ?? []
+            return try mainContext.performAndWait {
+                return try mainContext.fetch(fetchRequest) as? [E] ?? []
+            }
         } catch {
             print(error.localizedDescription)
         }
         return []
     }
     
+    // 2b Get Entity
+    private func getEntity<E: NSManagedObject>(fetchRequest: NSFetchRequest<E>) -> [E] {
+        do {
+            return try mainContext.performAndWait {
+                return try mainContext.fetch(fetchRequest)
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+        return []
+    }
+    
+    // 3 Get Entity and convert it into safeObjetct
     func getSafeObject<E, S>(entity: E.Type, predicates: [NSPredicate] = [], sortDescriptors: [SortDescriptor<E>] = []) -> [S] where E: NSManagedObject, E: SafeObjectType, S == E.SafeType {
         let fetchRequest = fetchRequest(entity: E.self, predicates: predicates, sortDescriptors: sortDescriptors)
         if let entities = getEntity(fetchRequest: fetchRequest) as? [E] {
@@ -67,33 +95,36 @@ extension PersistenceController {
         return []
     }
     
-    
 //    func deleteAllEntities() throws {
 //        let entities = PCShared.container.managedObjectModel.entities
-//
+//        
 //        for entity in entities {
-//            if let entityName = entity.name {
-//                _ = try deleteEntityInBackground(entityName: entityName)
-//            }
+//            _ = try await deleteEntityInBackgroundAlternative(entity: type(of: managedObject))
 //        }
+//        
 //    }
     
+    // 4a Delete Entity
     func deleteEntity<E: NSManagedObject>(entity: E.Type, predicates: [NSPredicate] = []) throws -> Bool {
-        let fetchRequest = fetchRequest(entity: E.self, predicates: predicates)
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        deleteRequest.resultType = .resultTypeObjectIDs
 
-        let batchDelete = try mainContext.execute(deleteRequest) as? NSBatchDeleteResult
+        return try mainContext.performAndWait {
+            let fetchRequest = fetchRequest(entity: E.self, predicates: predicates)
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            deleteRequest.resultType = .resultTypeObjectIDs
+            
+            let batchDelete = try mainContext.execute(deleteRequest) as? NSBatchDeleteResult
 
-        guard let deleteResult = batchDelete?.result as? [NSManagedObjectID] else { return false }
-        
-        let deletedObjects: [AnyHashable: Any] = [NSDeletedObjectsKey: deleteResult]
-        
-        NSManagedObjectContext.mergeChanges(fromRemoteContextSave: deletedObjects, into: [mainContext])
-        
-        return deleteResult.isEmpty == false
+            guard let deleteResult = batchDelete?.result as? [NSManagedObjectID] else { return false }
+            
+            let deletedObjects: [AnyHashable: Any] = [NSDeletedObjectsKey: deleteResult]
+            
+            NSManagedObjectContext.mergeChanges(fromRemoteContextSave: deletedObjects, into: [mainContext])
+            
+            return deleteResult.isEmpty == false
+        }
     }
     
+    // 4b Delete Entity in background
     func deleteEntityInBackground<E: NSManagedObject>(entity: E.Type, predicates: [NSPredicate] = []) throws -> Bool {
 
         return try privateContext.performAndWait {
@@ -107,26 +138,29 @@ extension PersistenceController {
             
             let deletedObjects: [AnyHashable: Any] = [NSDeletedObjectsKey: deleteResult]
             
-            NSManagedObjectContext.mergeChanges(fromRemoteContextSave: deletedObjects, into: [mainContext, privateContext])
+            NSManagedObjectContext.mergeChanges(fromRemoteContextSave: deletedObjects, into: [mainContext])
             
             return deleteResult.isEmpty == false
         }
     }
     
-    func deleteEntityInBackgroundAlternative<E: NSManagedObject>(entity: E.Type, predicates: [NSPredicate] = []) async throws {
+    // 4c Delete Entity in background
+    func deleteEntityInBackgroundAlternative<E: NSManagedObject>(entity: E.Type, predicates: [NSPredicate] = []) async throws -> Bool {
         
-        try await PCShared.container.performBackgroundTask { context in
+        return try await PCShared.container.performBackgroundTask { context in
             let fetchRequest = self.fetchRequest(entity: entity.self, predicates: predicates)
             let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
             deleteRequest.resultType = .resultTypeObjectIDs
             
             let batchDelete = try context.execute(deleteRequest) as? NSBatchDeleteResult
 
-            guard let deleteResult = batchDelete?.result as? [NSManagedObjectID] else { return }
+            guard let deleteResult = batchDelete?.result as? [NSManagedObjectID] else { return false }
             
             let deletedObjects: [AnyHashable: Any] = [NSDeletedObjectsKey: deleteResult]
             
-            NSManagedObjectContext.mergeChanges(fromRemoteContextSave: deletedObjects, into: [mainContext, context])
+            NSManagedObjectContext.mergeChanges(fromRemoteContextSave: deletedObjects, into: [mainContext])
+            
+            return deleteResult.isEmpty == false
         }
     }
 }
