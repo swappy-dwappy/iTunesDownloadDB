@@ -50,7 +50,7 @@ extension PersistenceController {
     }
     
     // 1b Fetch Request
-    private func fetchRequest2(entityName: String, predicates: [NSPredicate] = [], sortId: String?) -> NSFetchRequest<NSManagedObject> {
+    private func fetchRequest(entityName: String, predicates: [NSPredicate] = [], sortId: String?) -> NSFetchRequest<NSManagedObject> {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
         fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         if let sortId = sortId {
