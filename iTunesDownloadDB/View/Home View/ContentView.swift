@@ -52,7 +52,6 @@ struct ContentView: View {
 //                        // 2
 //                        let isDeleted = try PCShared.deleteEntity(entity: PodcastEntity.self)
 //                        if isDeleted {
-//                            viewModel.refreshDBFetch()
 //                            Task {
 //                                await viewModel.fetchPodcast()
 //                            }
@@ -61,7 +60,6 @@ struct ContentView: View {
                         //3
                         let isDeleted = try PCShared.deleteEntityInBackground(entity: PodcastEntity.self)
                         if isDeleted {
-                            viewModel.refreshDBFetch()
                             Task {
                                 await viewModel.fetchPodcast()
                             }
@@ -71,7 +69,6 @@ struct ContentView: View {
 //                        Task {
 //                            let isDeleted = try await PCShared.deleteEntityInBackgroundAlternative(entity: PodcastEntity.self)
 //                            if isDeleted {
-//                                viewModel.refreshDBFetch()
 //                                await viewModel.fetchPodcast()
 //                            }
 //                        }
