@@ -42,12 +42,12 @@ struct ContentView: View {
             .toolbar {
                 Button("", systemImage: "trash") {
                     do {
-                        // 1
-                        Task {
-                            await PCShared.deleteAllEntities()
-                            viewModel.refreshDBFetch()
-                            await viewModel.fetchPodcast()
-                        }
+//                        // 1
+//                        Task {
+//                            await PCShared.deleteAllEntities()
+//                            viewModel.refreshDBFetch()
+//                            await viewModel.fetchPodcast()
+//                        }
                         
 //                        // 2
 //                        let isDeleted = try PCShared.deleteEntity(entity: PodcastEntity.self)
@@ -58,14 +58,14 @@ struct ContentView: View {
 //                            }
 //                        }
                         
-//                        //3
-//                        let isDeleted = try PCShared.deleteEntityInBackground(entity: PodcastEntity.self)
-//                        if isDeleted {
-//                            viewModel.refreshDBFetch()
-//                            Task {
-//                                await viewModel.fetchPodcast()
-//                            }
-//                        }
+                        //3
+                        let isDeleted = try PCShared.deleteEntityInBackground(entity: PodcastEntity.self)
+                        if isDeleted {
+                            viewModel.refreshDBFetch()
+                            Task {
+                                await viewModel.fetchPodcast()
+                            }
+                        }
                         
 //                        //4
 //                        Task {
@@ -76,8 +76,7 @@ struct ContentView: View {
 //                            }
 //                        }
                     } catch {
-                        //TODO: Show some error
-                        print(error.localizedDescription)
+                        fatalError("Core Data Crash")
                     }
                 }
             }
