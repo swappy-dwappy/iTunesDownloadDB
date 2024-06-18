@@ -67,3 +67,9 @@ struct Episode: Identifiable, Codable {
             .appendingPathExtension("mp3")
     }
 }
+
+extension Episode: Comparable {
+    static func < (lhs: Self, rhs: Self) -> Bool {
+        lhs.title < rhs.title
+    }
+}

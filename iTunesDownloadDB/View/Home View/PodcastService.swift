@@ -12,17 +12,16 @@ class PodcastService: PodcastServiceType {
     @MainActor
     func getPodcast() async -> Result<Podcast, Error> {
         
-//        let episode = \(PodcastEntity.episodes!.allObjects.first as! Episode).title
-//        let path = episode.title
-//        let sortDes = SortDescriptor(episode, order: .reverse)
-        if let podcast = PCShared.getSafeObject(entity: PodcastEntity.self).first {
+        if var podcast = PCShared.getSafeObject(entity: PodcastEntity.self).first {
+            podcast.episodes.sort()
             return .success(podcast)
         } else {
             let result = await NetworkManager().getPodcast(id: 1386867488, media: "podcast", entity: "podcastEpisode", limit: 5)
             switch result {
-            case let .success(podcast):
+            case var .success(podcast):
                 let _ = PodcastEntity.create(safe: podcast)
                 try? PCShared.save()
+                podcast.episodes.sort()
                 return .success(podcast)
                 
             case .failure(let error):
