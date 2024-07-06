@@ -63,7 +63,7 @@ struct Episode: Identifiable, Codable {
     var fileURL: URL {
         URL.documentsDirectory
             .appending(path: "\(podcastID)")
-            .appending(path: "\(String(describing: id))")
+            .appending(path: "\(String(describing: id ?? 0))")
             .appendingPathExtension("mp3")
     }
 }
